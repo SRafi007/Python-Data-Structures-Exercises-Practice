@@ -20,6 +20,79 @@ Step 2: Implement methods for inserting nodes into the tree based on the BST pro
 Step 3: Implement traversal methods (inorder, preorder, postorder).
 
 """
+#Python Code for Binary Tree:
+
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BinaryTree:
+    def __init__(self):
+        self.root = None
+
+    # Insert a new node into the binary tree (Level order insertion)
+    def insert(self, data):
+        new_node = Node(data)
+        if self.root is None:
+            self.root = new_node
+            return
+        queue = [self.root]
+        while queue:
+            temp = queue.pop(0)
+            if temp.left is None:
+                temp.left = new_node
+                break
+            else:
+                queue.append(temp.left)
+            if temp.right is None:
+                temp.right = new_node
+                break
+            else:
+                queue.append(temp.right)
+
+    # Inorder traversal (Left, Root, Right)
+    def inorder(self, node):
+        if node:
+            self.inorder(node.left)
+            print(node.data, end=" ")
+            self.inorder(node.right)
+
+    # Preorder traversal (Root, Left, Right)
+    def preorder(self, node):
+        if node:
+            print(node.data, end=" ")
+            self.preorder(node.left)
+            self.preorder(node.right)
+
+    # Postorder traversal (Left, Right, Root)
+    def postorder(self, node):
+        if node:
+            self.postorder(node.left)
+            self.postorder(node.right)
+            print(node.data, end=" ")
+
+# Example Usage:
+binary_tree = BinaryTree()
+binary_tree.insert(1)
+binary_tree.insert(2)
+binary_tree.insert(3)
+binary_tree.insert(4)
+binary_tree.insert(5)
+
+print("Inorder traversal:")
+binary_tree.inorder(binary_tree.root)  # Output: 4 2 5 1 3
+
+print("\nPreorder traversal:")
+binary_tree.preorder(binary_tree.root)  # Output: 1 2 4 5 3
+
+print("\nPostorder traversal:")
+binary_tree.postorder(binary_tree.root)  # Output: 4 5 2 3 1
+
+
+######################################################
 
 #Python Code for Binary Search Tree:
 
